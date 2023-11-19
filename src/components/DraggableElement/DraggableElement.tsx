@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, ReactElement } from 'react';
+import React, { useState, useEffect, useCallback, ReactElement, CSSProperties } from 'react';
 import styles from './Draggable.module.scss';
 
 interface DraggableElementProps {
@@ -6,9 +6,10 @@ interface DraggableElementProps {
   y: number;
   number: number;
   onSelect: () => void;
+  style?: CSSProperties;
 }
 
-const DraggableElement = ({ x, y, number, onSelect }: DraggableElementProps): ReactElement => {
+const DraggableElement = ({ x, y, number, onSelect, style }: DraggableElementProps): ReactElement => {
   const [isDragging, setDragging] = useState(false);
   const [position, setPosition] = useState({ x, y });
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -52,11 +53,11 @@ const DraggableElement = ({ x, y, number, onSelect }: DraggableElementProps): Re
   return (
       <div
           className={styles.draggable__element}
-          style={{ left: position.x, top: position.y }}
+          style={{ left: position.x, top: position.y, ...style }}
           onMouseDown={onMouseDown}
           onClick={onSelect}
       >
-        {number + 1}
+        {number}
       </div>
   );
 };

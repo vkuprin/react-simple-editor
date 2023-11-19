@@ -53,6 +53,9 @@ const Editor = (): ReactElement => {
                     y={element.y}
                     number={element.id}
                     onSelect={() => selectElement(element.id)}
+                    style={{
+                        outline: selectedElementId === element.id ? "6px solid black" : "none"
+                    }}
                 />
             ))}
         </div>
