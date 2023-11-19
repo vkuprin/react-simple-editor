@@ -1,40 +1,60 @@
-import React, { useState, MouseEvent, ReactElement } from "react";
-import styles from "./Draggable.module.scss";
+import React, { useState, useEffect, useCallback, ReactElement } from 'react';
+import styles from './Draggable.module.scss';
 
-const DraggableElement = (): ReactElement => {
+interface DraggableElementProps {
+  x: number;
+  y: number;
+}
+
+const DraggableElement = ({ x, y }: DraggableElementProps): ReactElement => {
   const [isDragging, setDragging] = useState(false);
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x, y });
   const [offset, setOffset] = useState({ x: 0, y: 0 });
 
-  const onMouseDown = (e: MouseEvent<HTMLDivElement>) => {
+  const onMouseDown = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     setDragging(true);
     setOffset({
       x: e.clientX - position.x,
       y: e.clientY - position.y,
     });
-  };
+  }, [position.x, position.y]);
 
-  const onMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+  const onMouseMove = useCallback((e: MouseEvent) => {
     if (isDragging) {
       setPosition({
         x: e.clientX - offset.x,
         y: e.clientY - offset.y,
       });
     }
-  };
+  }, [isDragging, offset.x, offset.y]);
 
-  const onMouseUp = () => setDragging(false);
+  const onMouseUp = useCallback(() => {
+    setDragging(false);
+  }, []);
+
+  useEffect(() => {
+    const handleMouseMove = onMouseMove as EventListener;
+    const handleMouseUp = onMouseUp as EventListener;
+
+    if (isDragging) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+    }
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [isDragging, onMouseMove, onMouseUp]);
 
   return (
-    <div
-      className={styles.draggable__element}
-      style={{ left: position.x, top: position.y }}
-      onMouseDown={onMouseDown}
-      onMouseMove={onMouseMove}
-      onMouseUp={onMouseUp}
-    >
-      Drag me
-    </div>
+      <div
+          className={styles.draggable__element}
+          style={{ left: position.x, top: position.y }}
+          onMouseDown={onMouseDown}
+      >
+        Drag me
+      </div>
   );
 };
 

@@ -33,4 +33,5 @@ If you’re comfortable with TypeScript, we encourage you to use it, but it is n
 
 - You must use the `create-react-app` utility to set up the project.
 - You must build the drag-functionality yourself. Do not use libraries such as `react-draggable`.
+
 # react-simple-editor
