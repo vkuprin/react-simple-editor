@@ -1,0 +1,18 @@
+.draggable__element {
+  width: 100px;
+  height: 100px;
+  background-color: lightblue;
+  position: absolute;
+  cursor: grab;
+  user-select: none;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: deepskyblue;
+  }
+
+  &:active {
+    background-color: dodgerblue;
+    cursor: grabbing;
+  }
+}
