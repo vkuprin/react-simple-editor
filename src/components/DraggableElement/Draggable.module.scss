@@ -6,6 +6,7 @@
   cursor: grab;
   user-select: none;
   transition: background-color 0.3s ease;
+  outline: 8px solid dodgerblue;
 
   &:hover {
     background-color: deepskyblue;

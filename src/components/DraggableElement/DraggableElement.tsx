@@ -4,9 +4,10 @@ import styles from './Draggable.module.scss';
 interface DraggableElementProps {
   x: number;
   y: number;
+  number: number;
 }
 
-const DraggableElement = ({ x, y }: DraggableElementProps): ReactElement => {
+const DraggableElement = ({ x, y, number }: DraggableElementProps): ReactElement => {
   const [isDragging, setDragging] = useState(false);
   const [position, setPosition] = useState({ x, y });
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -53,7 +54,7 @@ const DraggableElement = ({ x, y }: DraggableElementProps): ReactElement => {
           style={{ left: position.x, top: position.y }}
           onMouseDown={onMouseDown}
       >
-        Drag me
+        {number + 1}
       </div>
   );
 };
