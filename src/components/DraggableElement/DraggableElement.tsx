@@ -5,9 +5,10 @@ interface DraggableElementProps {
   x: number;
   y: number;
   number: number;
+  onSelect: () => void;
 }
 
-const DraggableElement = ({ x, y, number }: DraggableElementProps): ReactElement => {
+const DraggableElement = ({ x, y, number, onSelect }: DraggableElementProps): ReactElement => {
   const [isDragging, setDragging] = useState(false);
   const [position, setPosition] = useState({ x, y });
   const [offset, setOffset] = useState({ x: 0, y: 0 });
@@ -53,6 +54,7 @@ const DraggableElement = ({ x, y, number }: DraggableElementProps): ReactElement
           className={styles.draggable__element}
           style={{ left: position.x, top: position.y }}
           onMouseDown={onMouseDown}
+          onClick={onSelect}
       >
         {number + 1}
       </div>
