@@ -1,4 +1,4 @@
-# Fullstack Engineer Quest
+# react-simple-editor
 
 ## ⛰ The **Quest: Build a Basic Editor**
 
@@ -14,5 +14,3 @@ There are many different ways to scope and implement a solution. We recommend ke
 
 - You must use the `create-react-app` utility to set up the project.
 - You must build the drag-functionality yourself. Do not use libraries such as `react-draggable`.
-
-# react-simple-editor
